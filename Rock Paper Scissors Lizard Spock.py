@@ -32,6 +32,12 @@ vert_box = pygame.Rect(250,100,25,575)
 #horizontal box
 h_box = pygame.Rect(275,375,700,25)
 
+#Player Cover Box
+p_cover = pygame.Rect(450,425,60,60)
+
+#Computer Cover Box
+c_cover = pygame.Rect(500,125,60,60)
+
 #computer name
 computer_name = "Computer:"
 computer_words = font.render(computer_name, True, blackcolor)
@@ -65,11 +71,37 @@ spock_button = pygame.Rect(25,600,200,75)
 spock_name = "SPOCK"
 spock_words = font.render(spock_name, True, whitecolor)
 
+#Win Tie Cover top
+c_win_tie_cover = pygame.Rect(675,100,100,60)
+p_win_tie_cover = pygame.Rect(675,550,100,60)
+
 def gametie():
+    win = "WIN"
     tie = "TIE"
     tie_words = font.render(tie, True, redcolor)
-    window.blit(tie_words, (300,500))
+    pygame.draw.rect(window, whitecolor, c_win_tie_cover)
+    pygame.draw.rect(window, whitecolor, p_win_tie_cover)
+    window.blit(tie_words, (675,550))
+    window.blit(tie_words, (675,100))
+
     
+
+def playerwin():
+    win = "WIN"
+    tie = "TIE"
+    pwin_words = font.render(win, True, redcolor)
+    pygame.draw.rect(window, whitecolor, p_win_tie_cover)
+    pygame.draw.rect(window, whitecolor, c_win_tie_cover)
+    window.blit(pwin_words, (675,550))
+
+
+def compwin():
+    win = "WIN"
+    tie = "TIE"
+    cwin_words = font.render(win, True, redcolor)
+    pygame.draw.rect(window, whitecolor, c_win_tie_cover)
+    pygame.draw.rect(window, whitecolor, p_win_tie_cover)
+    window.blit(cwin_words, (675,100))
 
 
 def game():
@@ -99,8 +131,99 @@ def game():
                     player = "rock"
                     if comp == player:
                         gametie()
-        
+                    elif comp == "lizard" or comp == "scissors":
+                        playerwin()
+                        pScore += 1
+                        pygame.draw.rect(window, whitecolor, p_cover)
+                        pScore_words = font.render( str(pScore), True, blackcolor)
+                        window.blit(pScore_words, (450,425))
+                        
+                    else:
+                        compwin()
+                        cScore += 1
+                        pygame.draw.rect(window, whitecolor, c_cover)
+                        cScore_words = font.render( str(cScore), True, blackcolor)
+                        window.blit(cScore_words, (500,125))
 
+                #Player = paper
+                if paper_button.collidepoint(event.pos):
+                    comp = random.choice(action)
+                    player = "paper"
+                    if comp == player:
+                        gametie()
+                    elif comp == "rock" or comp == "spock":
+                        playerwin()
+                        pScore += 1
+                        pygame.draw.rect(window, whitecolor, p_cover)
+                        pScore_words = font.render( str(pScore), True, blackcolor)
+                        window.blit(pScore_words, (450,425))
+                    else:
+                        compwin()
+                        cScore += 1
+                        pygame.draw.rect(window, whitecolor, c_cover)
+                        cScore_words = font.render( str(cScore), True, blackcolor)
+                        window.blit(cScore_words, (500,125))
+
+                #Player = scissors
+                if sci_button.collidepoint(event.pos):
+                    comp = random.choice(action)
+                    player = "scissors"
+                    if comp == player:
+                        gametie()
+                    elif comp == "paper" or comp == "lizard":
+                        playerwin()
+                        pScore += 1
+                        pygame.draw.rect(window, whitecolor, p_cover)
+                        pScore_words = font.render( str(pScore), True, blackcolor)
+                        window.blit(pScore_words, (450,425))
+                    else:
+                        compwin()
+                        cScore += 1
+                        pygame.draw.rect(window, whitecolor, c_cover)
+                        cScore_words = font.render( str(cScore), True, blackcolor)
+                        window.blit(cScore_words, (500,125))
+
+                #Player = lizard
+                if liz_button.collidepoint(event.pos):
+                    comp = random.choice(action)
+                    player = "lizard"
+                    if comp == player:
+                        gametie()
+                    elif comp == "paper" or comp == "spock":
+                        playerwin()
+                        pScore += 1
+                        pygame.draw.rect(window, whitecolor, p_cover)
+                        pScore_words = font.render( str(pScore), True, blackcolor)
+                        window.blit(pScore_words, (450,425))
+                        
+                    else:
+                        compwin()
+                        cScore += 1
+                        pygame.draw.rect(window, whitecolor, c_cover)
+                        cScore_words = font.render( str(cScore), True, blackcolor)
+                        window.blit(cScore_words, (500,125))
+
+
+                #Player = spock
+                if spock_button.collidepoint(event.pos):
+                    comp = random.choice(action)
+                    player = "spock"
+                    if comp == player:
+                        gametie()
+                    elif comp == "rock" or comp == "scissors":
+                        playerwin()
+                        pScore += 1
+                        pygame.draw.rect(window, whitecolor, p_cover)
+                        pScore_words = font.render( str(pScore), True, blackcolor)
+                        window.blit(pScore_words, (450,425))
+                    else:
+                        compwin()
+                        cScore += 1
+                        pygame.draw.rect(window, whitecolor, c_cover)
+                        cScore_words = font.render( str(cScore), True, blackcolor)
+                        window.blit(cScore_words, (500,125))
+        
+                        
         pygame.draw.rect(window, blackcolor, spock_button)              #place spock button
         window.blit(spock_words, (spock_button.x +35, spock_button.y +22))  #place spock name
         pygame.draw.rect(window, blackcolor, liz_button)                #place lizard button
