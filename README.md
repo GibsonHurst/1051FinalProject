@@ -4,6 +4,7 @@ Gibson's Final Project
 To run the code:
 
 Open the file in python
+
 You must have pygame
 
 Click play or exit
