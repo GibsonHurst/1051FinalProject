@@ -1,6 +1,10 @@
 # 1051FinalProject
 Gibson's Final Project
 
+My video:
+
+https://youtu.be/8MVzp3qAFPE
+
 To run the code:
 
 Open the file in python
